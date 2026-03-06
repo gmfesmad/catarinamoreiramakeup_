@@ -1,0 +1,695 @@
+.page {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+.page-lead {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin: 0 0 1.5rem;
+  max-width: 42ch;
+  text-align: justify;
+}
+
+.page-text {
+  color: var(--text);
+  margin: 0 0 1rem;
+  max-width: 65ch;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  /*color: var(--text);*/
+  color: var(--accent);
+  margin: 0 0 1rem;
+  max-width: 65ch;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.home {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
+  padding: 0;
+}
+
+.home-banner {
+  display: block;
+  width: 100vw;
+  height: auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.profile-pic {
+  display: block;
+  margin: 0 auto;
+  width: 350px;
+  /* Set a fixed width */
+  height: 350px;
+  /* Same as width */
+  border-radius: 50%;
+  /* Makes it circular */
+  object-fit: cover;
+}
+
+/* Services */
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.service-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.service-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.service-desc {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.service-details {
+  border: none;
+}
+
+.service-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.25rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.service-summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-toggle {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--accent);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.service-details[open] .service-toggle {
+  transform: rotate(45deg);
+}
+
+.service-details[open] .service-desc {
+  padding: 0 1.25rem 1.25rem;
+  text-align: justify;
+}
+
+/* Mission & Values */
+.values-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  max-width: 350px;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 16px;
+
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  border-radius: 16px;
+}
+
+/* Setas */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Aparecem no hover */
+.slider:hover .arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pequeno efeito elegante */
+.arrow:hover {
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Posicionamento */
+.left {
+  left: 15px;
+}
+
+.right {
+  right: 15px;
+}
+
+/* Indicadores */
+.indicators {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  
+  background-color: lightgray;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.dot.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+
+.service-details[open] .service-image {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.values-item {
+  color: var(--text);
+}
+
+/* Contacts */
+.contact-block {
+  margin: 1.5rem 0;
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin-right: 0.35em;
+}
+
+.contact-icon-email {
+  color: var(--accent);
+}
+
+.contact-icon-whatsapp {
+  color: #25d366;
+}
+
+.contact-icon-instagram {
+  color: #e4405f;
+}
+
+.contact-item {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+}
+
+.contact-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-note {
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+@media (hover: none) {
+  .arrow {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Testimonials */
+.testimonials-section {
+  text-align: center;
+  padding: 0px 20px;
+  background: #f9f7f8;
+  /* soft feminine tone */
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Wrap ONLY the bubble */
+.bubble-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 160px; /* 👈 adjust based on your longest message */
+}
+
+.message-bubble {
+  max-width: 500px;
+  padding: 18px 22px;
+  background: #e5e5ea;
+  /* iMessage gray */
+  border-radius: 50px;
+  font-size: 16px;
+  line-height: 1.5;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 25px;
+  white-space: pre-line;
+}
+
+.arrowTestimonials {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 50%;
+  background: none;
+}
+
+.arrowTestimonials.left {
+  left: -60px;
+}
+
+.arrowTestimonials.right {
+  right: -60px;
+}
+
+.arrowTestimonials:hover {
+  background: white;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dotsTestimonials {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dotTestimonials {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: lightgray; /* inactive iOS gray */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dotTestimonials.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+/** Contact Form */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  position: relative;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.input-group select {
+  width: 100%;
+}
+
+
+input,
+textarea {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.25s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  border-color: var(--accent);
+}
+
+textarea {
+  resize: vertical;
+}
+
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 12px 45px 12px 14px; /* space for arrow */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  cursor: pointer;
+  border-color: none;
+}
+
+/* Custom arrow */
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 15px; /* distance from right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 8 10 12 14 8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.select-wrapper select:hover {
+  outline: none;
+  border-color: #c9a6ff;
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+.select-wrapper select:focus {
+  outline: none;        /* removes default blue outline */
+  border-color: #ccc;   /* keep your normal border color */
+  box-shadow: 0 0 0 3px var(--accent);    /* removes blue glow in some browsers */
+}
+
+.send-button {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.send-button:hover {
+  transform: translateY(-2px);
+  background: #333;
+}
+
+.floating-group {
+  position: relative;
+  width: 100%;
+}
+
+.floating-group input,
+.floating-group textarea,
+.floating-group select {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  font-family: inherit;
+  background: white;
+}
+
+.floating-group label {
+  position: absolute;
+  left: 14px;
+  top: 16px;
+  color: #777;
+  font-size: 16px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: white;
+  padding: 0 4px;
+}
+
+.floating-group input:focus + label,
+.floating-group input:not(:placeholder-shown) + label,
+.floating-group textarea:focus + label,
+.floating-group textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.floating-group input:focus,
+.floating-group textarea:focus {
+  outline: none;
+  border-color: #c9a6ff;
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f7f3ff;
+  color: #5a4fa3;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.floating-success-card {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: white;
+  padding: 16px 24px;
+  border-radius: 14px;
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+
+  font-size: 15px;
+  color: #5a4fa3;
+
+  animation: slideUpFade 0.4s ease;
+  z-index: 999;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+
+/** Noiva Timeline **/
+
+.bridal-timeline-luxury {
+  position: relative;
+  margin: 40px 0;
+  padding-left: 40px;
+}
+
+/* linha vertical */
+.bridal-timeline-luxury::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+}
+
+.timeline-step {
+  position: relative;
+  display: flex;
+  margin-bottom: 40px;
+  animation: fadeUp 0.6s ease;
+}
+
+/* círculo */
+.timeline-marker {
+  position: absolute;
+  left: -2px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  background: white;
+  border: 2px solid var(--accent);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* texto */
+.timeline-content {
+  margin-left: 50px;
+}
+
+.timeline-content h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.timeline-content p {
+  margin-top: 8px;
+  line-height: 1.6;
+  color: #555;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
