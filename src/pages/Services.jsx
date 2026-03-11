@@ -56,7 +56,7 @@ function ImageSlider({ images, title }) {
       const nearest = Math.min(Math.max(0, Math.round(el.scrollLeft / w)), images.length - 1)
       const targetLeft = nearest * w
       if (Math.abs(el.scrollLeft - targetLeft) > 2) {
-        el.scrollTo({ left: targetLeft, behavior: 'auto' })
+        el.scrollTo({ left: targetLeft, behavior: 'smooth' })
       }
       setCurrent(nearest)
     }

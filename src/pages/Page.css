@@ -972,14 +972,14 @@ textarea {
   .slider.slider--mobile-scroll .slider-track {
     transform: none !important;
     transition: none;
-    scroll-snap-align: start;
-    -webkit-scroll-snap-align: start;
+    scroll-snap-align: center;
+    -webkit-scroll-snap-align: center;
     z-index: 0;
   }
 
   .slider.slider--mobile-scroll .service-image {
-    scroll-snap-align: start;
-    -webkit-scroll-snap-align: start;
+    scroll-snap-align: center;
+    -webkit-scroll-snap-align: center;
     scroll-snap-stop: always;
   }
 
