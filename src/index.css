@@ -30,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 *,
@@ -43,11 +44,53 @@ body {
   min-width: 320px;
   min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
 }
-
 
 #root {
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Block landscape orientation on mobile/tablet only (not desktop) */
+.landscape-blocker {
+  display: none;
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  body {
+    overflow: hidden;
+  }
+
+  .landscape-blocker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: var(--bg);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .landscape-blocker-content {
+    max-width: 320px;
+  }
+
+  .landscape-blocker-icon {
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .landscape-blocker p {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
 }
 
 a {

@@ -28,7 +28,7 @@
   transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .back-to-top {
     bottom: 1rem;
     right: 1rem;

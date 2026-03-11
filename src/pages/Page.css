@@ -143,7 +143,7 @@
 }
 
 /* Mobile: hero – section height = image height, no extra space */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .home {
     height: auto;
     min-height: 0;
@@ -869,8 +869,8 @@ textarea {
   }
 }
 
-/* ========== Mobile (≤768px) ========== */
-@media (max-width: 768px) {
+/* ========== Mobile (≤1024px) ========== */
+@media (max-width: 1024px) {
   .page-title {
     font-size: clamp(1.75rem, 6vw, 2.25rem);
     margin-bottom: 0.75rem;
