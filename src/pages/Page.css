@@ -977,6 +977,7 @@ textarea {
 
   .slider.slider--mobile-scroll .service-image {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   .slider.slider--mobile-scroll .arrow {
