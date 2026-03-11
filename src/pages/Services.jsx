@@ -1,151 +1,56 @@
 import './Page.css'
-import { useState, useEffect, useRef } from 'react'
-import noiva from '../assets/noiva.JPG';
-import noiva2 from '../assets/noiva2.JPG';
-import noiva3 from '../assets/noiva3.JPG';
-
-
-import socialv2 from '../assets/social_v2.JPG';
-import social2 from '../assets/social2.JPG';
-import social3 from '../assets/social3.JPG';
-import social4 from '../assets/social4.JPG';
-import social5 from '../assets/social5.JPG';
-import social6 from '../assets/social6.JPG';
-import social7 from '../assets/social7.JPG';
-import social8 from '../assets/social8.JPG';
-
-
-import criativa from '../assets/criativa.JPG';
-import criativa2 from '../assets/criativa2.jpg';
-import criativa3 from '../assets/criativa3.JPG';
-import criativa4 from '../assets/criativa4.JPG';
-import criativa5 from '../assets/criativa5.JPG';
-
-const MOBILE_BREAKPOINT = 1024
-
-function useMobileScroll() {
-  const [isMobile, setIsMobile] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
-    const update = () => setIsMobile(mq.matches)
-    update()
-    mq.addEventListener('change', update)
-    return () => mq.removeEventListener('change', update)
-  }, [])
-  return isMobile
-}
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import noiva from '../assets/noiva.JPG'
+import noiva2 from '../assets/noiva2.JPG'
+import noiva3 from '../assets/noiva3.JPG'
+import socialv2 from '../assets/social_v2.JPG'
+import social2 from '../assets/social2.JPG'
+import social3 from '../assets/social3.JPG'
+import social4 from '../assets/social4.JPG'
+import social5 from '../assets/social5.JPG'
+import social6 from '../assets/social6.JPG'
+import social7 from '../assets/social7.JPG'
+import social8 from '../assets/social8.JPG'
+import criativa from '../assets/criativa.JPG'
+import criativa2 from '../assets/criativa2.jpg'
+import criativa3 from '../assets/criativa3.JPG'
+import criativa4 from '../assets/criativa4.JPG'
+import criativa5 from '../assets/criativa5.JPG'
 
 function ImageSlider({ images, title }) {
-  const [current, setCurrent] = useState(0)
-  const isMobileScroll = useMobileScroll()
-  const sliderRef = useRef(null)
-
-  useEffect(() => {
-    if (!isMobileScroll || !sliderRef.current) return
-    const el = sliderRef.current
-    const width = () => el.offsetWidth
-    const updateCurrent = () => {
-      const w = width()
-      if (!w) return
-      const index = Math.round(el.scrollLeft / w)
-      setCurrent(Math.min(Math.max(0, index), images.length - 1))
-    }
-    const snapToNearest = () => {
-      const w = width()
-      if (!w) return
-      const nearest = Math.min(Math.max(0, Math.round(el.scrollLeft / w)), images.length - 1)
-      const targetLeft = nearest * w
-      if (Math.abs(el.scrollLeft - targetLeft) > 2) {
-        el.scrollTo({ left: targetLeft, behavior: 'smooth' })
-      }
-      setCurrent(nearest)
-    }
-    let snapTimeout
-    const scheduleSnap = () => {
-      updateCurrent()
-      clearTimeout(snapTimeout)
-      snapTimeout = setTimeout(snapToNearest, 50)
-    }
-    el.addEventListener('scroll', scheduleSnap, { passive: true })
-    el.addEventListener('scrollend', snapToNearest)
-    el.addEventListener('touchend', scheduleSnap)
-    return () => {
-      clearTimeout(snapTimeout)
-      el.removeEventListener('scroll', scheduleSnap)
-      el.removeEventListener('scrollend', snapToNearest)
-      el.removeEventListener('touchend', scheduleSnap)
-    }
-  }, [isMobileScroll, images.length])
-
-  const prevSlide = () => {
-    setCurrent((prev) =>
-      prev === 0 ? images.length - 1 : prev - 1
-    )
-  }
-
-  const nextSlide = () => {
-    setCurrent((prev) =>
-      prev === images.length - 1 ? 0 : prev + 1
-    )
-  }
-
-  const goToSlide = (index) => {
-    setCurrent(index)
-    if (isMobileScroll && sliderRef.current) {
-      const width = sliderRef.current.offsetWidth
-      sliderRef.current.scrollTo({ left: index * width, behavior: 'smooth' })
-    }
-  }
-
-  const sliderTrackStyle = isMobileScroll
-    ? { width: `${images.length * 100}%`, transform: 'none' }
-    : { transform: `translateX(-${current * 100}%)` }
-
-  const imageWidthPercent = isMobileScroll ? 100 / images.length : undefined
-
   return (
-    <div className={`slider-wrapper ${isMobileScroll ? 'slider-wrapper--mobile-scroll' : ''}`}>
-      <div
-        ref={sliderRef}
-        className={`slider ${isMobileScroll ? 'slider--mobile-scroll' : ''}`}
+    <div className="slider-wrapper slider-wrapper--swiper">
+      <Swiper
+        className="slider slider--swiper"
+        modules={[Navigation, Pagination]}
+        spaceBetween={0}
+        slidesPerView={1}
+        speed={300}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        grabCursor
+        resistanceRatio={0}
+        touchReleaseOnEdges
       >
-        <div
-          className="slider-track"
-          style={sliderTrackStyle}
-        >
-          {images.map((img, index) => (
+        {images.map((img, index) => (
+          <SwiperSlide key={index}>
             <img
-              key={index}
               src={img}
               alt={`${title} ${index + 1}`}
               className="service-image"
-              style={imageWidthPercent != null ? { width: `${imageWidthPercent}%`, minWidth: `${imageWidthPercent}%` } : undefined}
             />
-          ))}
-        </div>
-
-        <button className="arrow left" onClick={prevSlide}>
-          ‹
-        </button>
-
-        <button className="arrow right" onClick={nextSlide}>
-          ›
-        </button>
-      </div>
-
-      <div className="indicators">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={`dot ${current === index ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-          />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }
-
 
 const services = [
   {
@@ -199,7 +104,7 @@ const services = [
               <p>
                 Criação e envio de um horário e planeamento da preparação da noiva e
                 convidadas, garantindo tranquilidade e tempo suficiente para cada maquilhagem.
-            
+
               </p>
             </div>
           </div>
@@ -213,7 +118,7 @@ const services = [
               <h4>Dia do Casamento</h4>
               <p>
                 Neste dia estou presente para criar a maquilhagem perfeita, com calma e atenção a cada detalhe, para que a noiva se sinta confiante, radiante e preparada para viver cada momento do seu grande dia. Para além disso, estou presente para acompanhar os momentos importantes, como a reportagem fotográfica.
-              
+
               </p>
             </div>
           </div>
@@ -224,7 +129,7 @@ const services = [
   },
   {
     title: 'Maquilhagem Social',
-    images: [socialv2, social4,social5,social2,social6,social8,social7,social3],
+    images: [socialv2, social4, social5, social2, social6, social8, social7, social3],
     description: (
       <p>
         Serviço de alta qualidade desenvolvido para quem procura elegância, sofisticação e um acabamento impecável,
@@ -238,7 +143,7 @@ const services = [
     images: [criativa5, criativa4, criativa3, criativa2, criativa],
     description: (
       <p>
-        Serviço onde a criatividade, expressão visual e elegância andam de mãos dadas. Ideal para quem deseja destacar-se com cores, brilho, detalhes especiais e elementos decorativos. 
+        Serviço onde a criatividade, expressão visual e elegância andam de mãos dadas. Ideal para quem deseja destacar-se com cores, brilho, detalhes especiais e elementos decorativos.
       </p>
     ),
   }
