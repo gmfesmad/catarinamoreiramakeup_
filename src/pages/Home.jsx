@@ -1,6 +1,6 @@
 import './Page.css'
 import banner from '../assets/CatarinaMoreiraBanner.svg'
-import bannerMobile from '../assets/banner_mobile.png'
+import bannerMobile from '../assets/banner_mobile.svg'
 
 function scrollToSection(id) {
   const el = document.getElementById(id)
