@@ -961,6 +961,7 @@ textarea {
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    -webkit-scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
 
@@ -972,11 +973,13 @@ textarea {
     transform: none !important;
     transition: none;
     scroll-snap-align: start;
+    -webkit-scroll-snap-align: start;
     z-index: 0;
   }
 
   .slider.slider--mobile-scroll .service-image {
     scroll-snap-align: start;
+    -webkit-scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 

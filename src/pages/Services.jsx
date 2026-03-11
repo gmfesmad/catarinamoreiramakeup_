@@ -43,13 +43,38 @@ function ImageSlider({ images, title }) {
   useEffect(() => {
     if (!isMobileScroll || !sliderRef.current) return
     const el = sliderRef.current
+    const width = () => el.offsetWidth
     const updateCurrent = () => {
-      const width = el.offsetWidth
-      const index = Math.round(el.scrollLeft / width)
-      setCurrent(Math.min(index, images.length - 1))
+      const w = width()
+      if (!w) return
+      const index = Math.round(el.scrollLeft / w)
+      setCurrent(Math.min(Math.max(0, index), images.length - 1))
     }
-    el.addEventListener('scroll', updateCurrent)
-    return () => el.removeEventListener('scroll', updateCurrent)
+    const snapToNearest = () => {
+      const w = width()
+      if (!w) return
+      const nearest = Math.min(Math.max(0, Math.round(el.scrollLeft / w)), images.length - 1)
+      const targetLeft = nearest * w
+      if (Math.abs(el.scrollLeft - targetLeft) > 2) {
+        el.scrollTo({ left: targetLeft, behavior: 'smooth' })
+      }
+      setCurrent(nearest)
+    }
+    let snapTimeout
+    const scheduleSnap = () => {
+      updateCurrent()
+      clearTimeout(snapTimeout)
+      snapTimeout = setTimeout(snapToNearest, 150)
+    }
+    el.addEventListener('scroll', scheduleSnap, { passive: true })
+    el.addEventListener('scrollend', snapToNearest)
+    el.addEventListener('touchend', scheduleSnap)
+    return () => {
+      clearTimeout(snapTimeout)
+      el.removeEventListener('scroll', scheduleSnap)
+      el.removeEventListener('scrollend', snapToNearest)
+      el.removeEventListener('touchend', scheduleSnap)
+    }
   }, [isMobileScroll, images.length])
 
   const prevSlide = () => {
