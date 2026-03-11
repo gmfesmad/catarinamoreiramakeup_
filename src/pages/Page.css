@@ -53,6 +53,7 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   width: 100vw;
+  width: 100svw; /* avoid scrollbar clipping on desktop */
   min-height: 100vh;
   padding: 0;
   display: flex;
@@ -61,6 +62,23 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+}
+
+/* Desktop: section height = image aspect ratio, button at bottom-left of banner */
+@media (min-width: 1025px) {
+  .home {
+    min-height: 0;
+    aspect-ratio: 1440 / 810; /* match CatarinaMoreiraBanner.svg viewBox */
+    height: auto;
+  }
+
+  .home-hero {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 clamp(2rem, 5vw, 3.5rem) clamp(2rem, 5vw, 4rem);
+    max-width: none;
+  }
 }
 
 .home-bg {
@@ -72,6 +90,7 @@
   background-repeat: no-repeat;
   -webkit-background-size: cover;
 }
+
 
 .home-bg-mobile {
   display: none;

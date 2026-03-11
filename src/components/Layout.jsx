@@ -32,12 +32,6 @@ export default function Layout() {
 
   return (
     <div className="layout">
-      <div className="landscape-blocker" aria-hidden="true">
-        <div className="landscape-blocker-content">
-          <span className="landscape-blocker-icon" aria-hidden="true">↻</span>
-          <p>Por favor, rode o seu dispositivo para modo vertical para utilizar o site.</p>
-        </div>
-      </div>
       {navOpen && (
         <button
           type="button"
