@@ -56,7 +56,7 @@ function ImageSlider({ images, title }) {
       const nearest = Math.min(Math.max(0, Math.round(el.scrollLeft / w)), images.length - 1)
       const targetLeft = nearest * w
       if (Math.abs(el.scrollLeft - targetLeft) > 2) {
-        el.scrollTo({ left: targetLeft, behavior: 'smooth' })
+        el.scrollTo({ left: targetLeft, behavior: 'auto' })
       }
       setCurrent(nearest)
     }
@@ -64,7 +64,7 @@ function ImageSlider({ images, title }) {
     const scheduleSnap = () => {
       updateCurrent()
       clearTimeout(snapTimeout)
-      snapTimeout = setTimeout(snapToNearest, 150)
+      snapTimeout = setTimeout(snapToNearest, 50)
     }
     el.addEventListener('scroll', scheduleSnap, { passive: true })
     el.addEventListener('scrollend', snapToNearest)
