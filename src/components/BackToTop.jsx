@@ -1,0 +1,34 @@
+import { useState, useEffect } from 'react'
+import './BackToTop.css'
+
+const SCROLL_THRESHOLD = 300
+
+export default function BackToTop() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      setVisible(window.scrollY > SCROLL_THRESHOLD)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  if (!visible) return null
+
+  return (
+    <button
+      type="button"
+      className="back-to-top"
+      onClick={scrollToTop}
+      aria-label="Voltar ao topo"
+    >
+      ↑
+    </button>
+  )
+}

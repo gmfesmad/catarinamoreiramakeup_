@@ -69,8 +69,8 @@ export default function Contacts() {
   return (
     <section className="page contacts">
       <h1 className="page-title">Contactos</h1>
-      <p className="page-lead">
-        Entre em contacto para agendar uma sessão ou fazer qualquer pergunta.
+      <p className="page-text">
+        Entra em contacto comigo para fazermos magia junta(o)s  💫🖤
       </p>
       <div className="contact-block">
         <p className="contact-item">
@@ -115,7 +115,7 @@ export default function Contacts() {
         </div>
         <div className='input-group'>
         <label>Serviço</label>
-          <div class="select-wrapper">
+          <div className="select-wrapper">
             <select name="evento" id="event_type">
               <option value="noiva">Maquilhagem de Noiva</option>
               <option value="social">Maquilhagem Social</option>

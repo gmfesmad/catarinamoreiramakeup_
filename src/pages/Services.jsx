@@ -115,8 +115,8 @@ const services = [
               <h4>Prova de Maquilhagem</h4>
               <p>
                 Este é um momento totalmente dedicado a conhecer a identidade da noiva
-                e o estilo do casamento. Juntas criamos a maquilhagem ideal para o
-                grande dia.
+                e o estilo do casamento. Juntas criamos a maquilhagem perfeita para o
+                grande dia!
               </p>
             </div>
           </div>
@@ -130,8 +130,8 @@ const services = [
               <h4>Organização da Timeline</h4>
               <p>
                 Criação e envio de um horário e planeamento da preparação da noiva e
-                convidadas, garantindo tranquilidade e tempo suficiente para cada
-                etapa.
+                convidadas, garantindo tranquilidade e tempo suficiente para cada maquilhagem.
+            
               </p>
             </div>
           </div>
@@ -144,8 +144,8 @@ const services = [
             <div className="timeline-content">
               <h4>Dia do Casamento</h4>
               <p>
-                No grande dia estou presente para criar a maquilhagem perfeita e
-                acompanhar momentos importantes como a reportagem fotográfica.
+                Neste dia estou presente para criar a maquilhagem perfeita, com calma e atenção a cada detalhe, para que a noiva se sinta confiante, radiante e preparada para viver cada momento do seu grande dia. Para além disso, estou presente para acompanhar os momentos importantes, como a reportagem fotográfica.
+              
               </p>
             </div>
           </div>

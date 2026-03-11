@@ -53,15 +53,147 @@
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   width: 100vw;
+  min-height: 100vh;
   padding: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
 
-.home-banner {
-  display: block;
-  width: 100vw;
-  height: auto;
-  border-radius: 0;
-  box-shadow: none;
+.home-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+}
+
+.home-bg-mobile {
+  display: none;
+}
+
+.home-bg-mobile-img {
+  display: none;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-hero {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  padding: 0 0 clamp(3.25rem, 12vw, 5.5rem) clamp(2rem, 6vw, 4rem);
+  max-width: 640px;
+}
+
+.home-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text);
+  margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+}
+
+.home-hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.home-hero-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+}
+
+.home-hero-cta {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--text);
+  padding: 0.75rem 1.75rem;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.home-hero-cta:hover {
+  color: var(--bg);
+  background: var(--text);
+}
+
+/* Mobile: hero – section height = image height, no extra space */
+@media (max-width: 768px) {
+  .home {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    width: 100%;
+    min-width: 100vw;
+    max-width: 100vw;
+  }
+
+  .home-bg-desktop {
+    display: none;
+  }
+
+  .home-bg-mobile {
+    display: none;
+  }
+
+  .home-bg-mobile-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+  }
+
+  
+
+  .home-hero {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 0 max(1.25rem, env(safe-area-inset-bottom)) max(0.5rem, env(safe-area-inset-left));
+    max-width: 100%;
+  }
+
+  .home-hero-title {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .home-hero-tagline {
+    font-size: clamp(0.9375rem, 4vw, 1.125rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .home-hero-cta {
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+  }
 }
 
 .profile-pic {
@@ -329,12 +461,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  min-height: 160px; /* 👈 adjust based on your longest message */
+/* Hidden measurer – same width as bubble, used to get min height */
+.bubble-measurer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.message-bubble-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .message-bubble {
   max-width: 500px;
+  max-height: 280px; /* fallback until measured min is applied */
+  overflow-y: auto;
   padding: 18px 22px;
   background: #e5e5ea;
   /* iMessage gray */
@@ -349,6 +498,23 @@
   border-bottom-left-radius: 25px;
   border-top-right-radius: 25px;
   white-space: pre-line;
+  position: relative;
+  z-index: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.message-bubble::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-bubble::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.message-bubble::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
 }
 
 .arrowTestimonials {
@@ -356,11 +522,15 @@
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  font-size: 28px;
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 1;
   cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 50%;
-  background: none;
+  padding: 0.5rem;
+  color: var(--accent);
+  background: transparent;
+  z-index: 2;
+  transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
 
 .arrowTestimonials.left {
@@ -372,9 +542,13 @@
 }
 
 .arrowTestimonials:hover {
-  background: white;
-  opacity: 1;
-  pointer-events: auto;
+  color: var(--text);
+  background-color: var(--accent-subtle);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.arrowTestimonials:active {
+  transform: translateY(-50%) scale(0.98);
 }
 
 @keyframes fadeIn {
@@ -691,5 +865,231 @@ textarea {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ========== Mobile (≤768px) ========== */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-lead {
+    font-size: 1.0625rem;
+    margin-bottom: 1rem;
+  }
+
+  .page-text,
+  .subtitle {
+    margin-bottom: 0.75rem;
+  }
+
+  .profile-pic {
+    width: min(280px, 100%);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  /* Services */
+  .services-list {
+    margin-top: 1.5rem;
+    gap: 1rem;
+  }
+
+  .service-summary {
+    padding: 1rem 1rem;
+  }
+
+  .service-details[open] .service-desc {
+    padding: 0 1rem 1rem;
+  }
+
+  .service-title {
+    font-size: 1.125rem;
+  }
+
+  .slider {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 12px;
+  }
+
+  .slider .arrow {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.75rem;
+  }
+
+  .slider .arrow.left {
+    left: 8px;
+    right: auto;
+  }
+
+  .slider .arrow.right {
+    left: auto;
+    right: 8px;
+  }
+
+  .indicators {
+    bottom: 8px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Bridal timeline */
+  .bridal-timeline-luxury {
+    margin: 24px 0;
+    padding-left: 28px;
+  }
+
+  .bridal-timeline-luxury::before {
+    left: 13px;
+  }
+
+  .timeline-marker {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+
+  .timeline-content {
+    margin-left: 40px;
+  }
+
+  .timeline-content h4 {
+    font-size: 1rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.9375rem;
+  }
+
+  .timeline-step {
+    margin-bottom: 28px;
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    padding: 0 0.5rem;
+  }
+
+  .slider-container {
+    padding: 0 0.5rem;
+  }
+
+  .bubble-wrapper {
+    width: 100%;
+    padding: 0 3rem;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .message-bubble {
+    max-width: 100%;
+    max-height: 240px;
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .arrowTestimonials {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    background: transparent;
+  }
+
+  .arrowTestimonials:hover {
+    color: var(--text);
+    background-color: var(--accent-subtle);
+  }
+
+  .arrowTestimonials.left {
+    left: 0.25rem;
+    right: auto;
+  }
+
+  .arrowTestimonials.right {
+    left: auto;
+    right: 0.25rem;
+  }
+
+  .dotsTestimonials {
+    margin-top: 1rem;
+    gap: 8px;
+  }
+
+  .dotTestimonials {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    min-height: 12px;
+  }
+
+  /* Contact */
+  .contact-block {
+    margin: 1rem 0;
+  }
+
+  .contact-item {
+    font-size: 0.9375rem;
+    word-break: break-word;
+  }
+
+  .contact-item a {
+    word-break: break-all;
+  }
+
+  .contact-form {
+    gap: 1.25rem;
+  }
+
+  .floating-group input,
+  .floating-group textarea,
+  .floating-group select,
+  input,
+  textarea {
+    padding: 14px 16px;
+    font-size: 16px;
+  }
+
+  .send-button {
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+
+  .floating-success-card {
+    left: 1rem;
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    transform: none;
+    margin: 0;
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

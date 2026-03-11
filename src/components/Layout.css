@@ -11,6 +11,18 @@
   background: var(--bg-header);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+  transition: background 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+.header--over-home {
+  background: rgba(250, 248, 246, 0.55);
+  border-bottom-color: rgba(160, 140, 130, 0.2);
+}
+
+@media (max-width: 768px) {
+  .header--over-home {
+    background: rgba(250, 248, 246, 0.7);
+  }
 }
 
 .nav {
@@ -19,8 +31,45 @@
   padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 1rem;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-icon-desktop {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .nav-icon-desktop {
+    display: flex;
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .nav-icon-mobile {
+    display: none;
+  }
+}
+
+.nav-icon-img {
+  display: block;
+  height: 4.25rem;
+  width: auto;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -92,6 +141,29 @@
   background: var(--accent-subtle);
 }
 
+.nav-cta {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: transparent;
+  border: 2px solid var(--text);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: -55%;
+}
+
+.nav-cta:hover {
+  color: var(--bg);
+  background: var(--text);
+}
+
 .main {
   flex: 1;
   max-width: var(--content-width);
@@ -122,11 +194,41 @@
   margin: 0;
 }
 
+/* Mobile: backdrop when menu is open */
+.nav-backdrop {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 8;
+    background: rgba(44, 37, 34, 0.4);
+    border: none;
+    cursor: pointer;
+    animation: navBackdropFade 0.2s ease;
+  }
+
+  @keyframes navBackdropFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   .nav {
     max-width: 100%;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1rem;
     justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .nav-icon-mobile {
+    margin-left: calc(-1 * (1rem - 0.25rem));
+  }
+
+  .nav-icon-mobile .nav-icon-img {
+    height: 4rem;
   }
 
   .nav-toggle {
@@ -137,16 +239,77 @@
     display: none;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.25rem;
+    gap: 0;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(44, 37, 34, 0.12);
+    border: 1px solid var(--border);
   }
 
   .nav.nav-open .nav-links {
     display: flex;
-    margin-top: 0.5rem;
   }
 
   .nav-link {
     width: 100%;
     text-align: left;
+    padding: 0.875rem 1.25rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text);
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .nav-link:hover {
+    background: var(--accent-subtle);
+    color: var(--accent);
+  }
+
+  .nav-link:active {
+    background: var(--accent-subtle);
+  }
+
+  .nav-cta {
+    display: none;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    min-height: 48px;
+    text-align: center;
+  }
+
+  .nav.nav-open .nav-cta {
+    display: block;
+  }
+
+  .main {
+    padding: 0 1rem 2rem;
+  }
+
+  .section {
+    padding: 2rem 0;
+    scroll-margin-top: 60px;
+  }
+
+  #home.section {
+    padding-top: 0;
+  }
+
+  .footer {
+    padding: 1rem 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }

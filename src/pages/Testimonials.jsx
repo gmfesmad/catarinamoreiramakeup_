@@ -1,5 +1,5 @@
 import './Page.css'
-import { useState } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 
 export default function Testimonials() {
 
@@ -33,6 +33,25 @@ Obrigada mais uma vez pelo teu excelente profissionalismo ✨`
   ];
 
   const [index, setIndex] = useState(0);
+  const [bubbleHeight, setBubbleHeight] = useState(null);
+  const measureRef = useRef(null);
+
+  const measureHeights = () => {
+    if (!measureRef.current) return;
+    const children = measureRef.current.querySelectorAll('.message-bubble-measure');
+    if (children.length === 0) return;
+    let min = children[0].offsetHeight;
+    children.forEach((el) => {
+      min = Math.min(min, el.offsetHeight);
+    });
+    if (min > 0) setBubbleHeight(min + 50);
+  };
+
+  useLayoutEffect(() => {
+    measureHeights();
+    window.addEventListener('resize', measureHeights);
+    return () => window.removeEventListener('resize', measureHeights);
+  }, []);
 
   const prevSlide = () => {
     setIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
@@ -51,15 +70,25 @@ Obrigada mais uma vez pelo teu excelente profissionalismo ✨`
 
         {/* Bubble + Arrows ONLY */}
         <div className="bubble-wrapper">
-          <button className="arrowTestimonials left" onClick={prevSlide}>
+          <div ref={measureRef} className="bubble-measurer" aria-hidden="true">
+            {testimonials.map((t, i) => (
+              <div key={i} className="message-bubble message-bubble-measure">
+                {t}
+              </div>
+            ))}
+          </div>
+          <button type="button" className="arrowTestimonials left" onClick={prevSlide} aria-label="Testemunho anterior">
             ‹
           </button>
 
-          <div key={index} className="message-bubble">
+          <div
+            className="message-bubble"
+            style={bubbleHeight != null ? { height: bubbleHeight } : undefined}
+          >
             {testimonials[index]}
           </div>
 
-          <button className="arrowTestimonials right" onClick={nextSlide}>
+          <button type="button" className="arrowTestimonials right" onClick={nextSlide} aria-label="Próximo testemunho">
             ›
           </button>
         </div>
