@@ -304,13 +304,17 @@
 }
 
 
+.slider-wrapper {
+  position: relative;
+  margin: 0 auto 1.5rem auto;
+}
+
 .slider {
   position: relative;
   overflow: hidden;
   max-width: 350px;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto;
   border-radius: 16px;
-
 }
 
 .slider-track {
@@ -367,10 +371,18 @@
 .indicators {
   position: absolute;
   bottom: 10px;
+  left: 0;
+  right: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   gap: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.indicators .dot {
+  pointer-events: auto;
 }
 
 .dot {
@@ -929,11 +941,46 @@ textarea {
     font-size: 1.125rem;
   }
 
-  .slider {
+  .slider-wrapper--mobile-scroll .slider {
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
     border-radius: 12px;
+  }
+
+  /* Mobile: indicators below slider so they're never clipped */
+  .slider-wrapper--mobile-scroll .indicators {
+    position: static;
+    margin-top: 0.75rem;
+    padding: 0;
+  }
+
+  /* Mobile: horizontal scroll instead of arrow-only carousel */
+  .slider.slider--mobile-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .slider.slider--mobile-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider.slider--mobile-scroll .slider-track {
+    transform: none !important;
+    transition: none;
+    scroll-snap-align: start;
+    z-index: 0;
+  }
+
+  .slider.slider--mobile-scroll .service-image {
+    scroll-snap-align: start;
+  }
+
+  .slider.slider--mobile-scroll .arrow {
+    display: none;
   }
 
   .slider .arrow {

@@ -1,6 +1,5 @@
 import './Page.css'
-import { useRef } from "react"
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import noiva from '../assets/noiva.JPG';
 import noiva2 from '../assets/noiva2.JPG';
 import noiva3 from '../assets/noiva3.JPG';
@@ -22,8 +21,36 @@ import criativa3 from '../assets/criativa3.JPG';
 import criativa4 from '../assets/criativa4.JPG';
 import criativa5 from '../assets/criativa5.JPG';
 
+const MOBILE_BREAKPOINT = 1024
+
+function useMobileScroll() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+  return isMobile
+}
+
 function ImageSlider({ images, title }) {
   const [current, setCurrent] = useState(0)
+  const isMobileScroll = useMobileScroll()
+  const sliderRef = useRef(null)
+
+  useEffect(() => {
+    if (!isMobileScroll || !sliderRef.current) return
+    const el = sliderRef.current
+    const updateCurrent = () => {
+      const width = el.offsetWidth
+      const index = Math.round(el.scrollLeft / width)
+      setCurrent(Math.min(index, images.length - 1))
+    }
+    el.addEventListener('scroll', updateCurrent)
+    return () => el.removeEventListener('scroll', updateCurrent)
+  }, [isMobileScroll, images.length])
 
   const prevSlide = () => {
     setCurrent((prev) =>
@@ -39,31 +66,47 @@ function ImageSlider({ images, title }) {
 
   const goToSlide = (index) => {
     setCurrent(index)
+    if (isMobileScroll && sliderRef.current) {
+      const width = sliderRef.current.offsetWidth
+      sliderRef.current.scrollTo({ left: index * width, behavior: 'smooth' })
+    }
   }
 
+  const sliderTrackStyle = isMobileScroll
+    ? { width: `${images.length * 100}%`, transform: 'none' }
+    : { transform: `translateX(-${current * 100}%)` }
+
+  const imageWidthPercent = isMobileScroll ? 100 / images.length : undefined
+
   return (
-    <div className="slider">
+    <div className={`slider-wrapper ${isMobileScroll ? 'slider-wrapper--mobile-scroll' : ''}`}>
       <div
-        className="slider-track"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        ref={sliderRef}
+        className={`slider ${isMobileScroll ? 'slider--mobile-scroll' : ''}`}
       >
-        {images.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={`${title} ${index + 1}`}
-            className="service-image"
-          />
-        ))}
+        <div
+          className="slider-track"
+          style={sliderTrackStyle}
+        >
+          {images.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`${title} ${index + 1}`}
+              className="service-image"
+              style={imageWidthPercent != null ? { width: `${imageWidthPercent}%`, minWidth: `${imageWidthPercent}%` } : undefined}
+            />
+          ))}
+        </div>
+
+        <button className="arrow left" onClick={prevSlide}>
+          ‹
+        </button>
+
+        <button className="arrow right" onClick={nextSlide}>
+          ›
+        </button>
       </div>
-
-      <button className="arrow left" onClick={prevSlide}>
-        ‹
-      </button>
-
-      <button className="arrow right" onClick={nextSlide}>
-        ›
-      </button>
 
       <div className="indicators">
         {images.map((_, index) => (
