@@ -7,6 +7,9 @@ import 'swiper/css/navigation'
 import noiva from '../assets/noiva.JPG'
 import noiva2 from '../assets/noiva2.JPG'
 import noiva3 from '../assets/noiva3.JPG'
+import noiva4 from '../assets/noiva4.JPG'
+import noiva5 from '../assets/noiva5.JPG'
+import noiva6 from '../assets/noiva6.JPG'
 import socialv2 from '../assets/social_v2.JPG'
 import social2 from '../assets/social2.JPG'
 import social3 from '../assets/social3.JPG'
@@ -55,7 +58,7 @@ function ImageSlider({ images, title }) {
 const services = [
   {
     title: 'Maquilhagem de Noiva',
-    images: [noiva, noiva3, noiva2],
+    images: [noiva6, noiva4, noiva5, noiva, noiva3, noiva2],
     description: (
       <>
         <p>
