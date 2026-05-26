@@ -10,6 +10,13 @@ import noiva3 from '../assets/noiva3.JPG'
 import noiva4 from '../assets/noiva4.JPG'
 import noiva5 from '../assets/noiva5.JPG'
 import noiva6 from '../assets/noiva6.JPG'
+import noiva8 from '../assets/noiva8.jpg'
+import noiva9 from '../assets/noiva9.jpg'
+import noiva10 from '../assets/noiva10.JPG'
+import noiva11 from '../assets/noiva11.jpg'
+import noiva12 from '../assets/noiva12.jpg'
+import noiva13 from '../assets/noiva13.jpg'
+import noiva14 from '../assets/noiva14.jpg'
 import socialv2 from '../assets/social_v2.JPG'
 import social2 from '../assets/social2.JPG'
 import social3 from '../assets/social3.JPG'
@@ -58,7 +65,7 @@ function ImageSlider({ images, title }) {
 const services = [
   {
     title: 'Maquilhagem de Noiva',
-    images: [noiva6, noiva4, noiva5, noiva, noiva3, noiva2],
+    images: [noiva13, noiva11, noiva12, noiva6, noiva4, noiva5, noiva9, noiva8, noiva, noiva3, noiva10],
     description: (
       <>
         <p>
