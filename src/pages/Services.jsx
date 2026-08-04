@@ -25,11 +25,20 @@ import social5 from '../assets/social5.JPG'
 import social6 from '../assets/social6.JPG'
 import social7 from '../assets/social7.JPG'
 import social8 from '../assets/social8.JPG'
+import social9 from '../assets/social9.jpg'
+import social10 from '../assets/social10.jpg'
+import social11 from '../assets/social11.jpg'
+import social12 from '../assets/social12.jpg'
+import social14 from '../assets/social14.jpg'
+import social15 from '../assets/social15.jpg'
 import criativa from '../assets/criativa.JPG'
 import criativa2 from '../assets/criativa2.jpg'
 import criativa3 from '../assets/criativa3.JPG'
 import criativa4 from '../assets/criativa4.JPG'
 import criativa5 from '../assets/criativa5.JPG'
+import workshop1 from '../assets/workshop_1.PNG'
+import workshop2 from '../assets/workshop_2.JPG'
+import workshop3 from '../assets/workshop_3.JPG'
 
 function ImageSlider({ images, title }) {
   return (
@@ -139,7 +148,7 @@ const services = [
   },
   {
     title: 'Maquilhagem Social',
-    images: [socialv2, social4, social5, social2, social6, social8, social7, social3, noiva10],
+    images: [social9, social10, social11, social12, social14, social15, socialv2, social4, social5, social2, social6, social8, social7, social3, noiva10],
     description: (
       <p>
         Serviço de alta qualidade e personalizado, desenvolvido para quem procura elegância, sofisticação e um acabamento impecável, confortável e duradouro. 
@@ -158,7 +167,7 @@ const services = [
   },
   {
     title: 'Master Your Makeup - Workshop de Automaquilhagem',
-    images: [],
+    images: [workshop1, workshop2, workshop3],
     description: (
       <p>
         Experiência totalmente personalizada, adaptada às necessidades, objetivos e estilo de cada pessoa.
