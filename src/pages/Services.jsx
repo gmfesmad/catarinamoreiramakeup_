@@ -65,14 +65,14 @@ function ImageSlider({ images, title }) {
 const services = [
   {
     title: 'Maquilhagem de Noiva',
-    images: [noiva13, noiva11, noiva12, noiva6, noiva4, noiva5, noiva9, noiva8, noiva, noiva3, noiva10],
+    images: [noiva13, noiva11, noiva12, noiva6, noiva4, noiva5, noiva9, noiva8, noiva, noiva3],
     description: (
       <>
         <p>
           Experiência personalizada e exclusiva, pensada ao detalhe para o dia mais especial de cada noiva e criada para
           refletir a identidade e o estilo do casamento. Com produtos de alta qualidade e técnicas profissionais
           exclusivas, está assegurada a durabilidade, conforto e um resultado de excelência para que cada noiva se
-          sinta segura, radiante e especial desde o primeiro ao último momento.
+          sinta segura, elegante e especial desde o primeiro ao último momento.
         </p>
         <div className="bridal-timeline-luxury">
           <div className="timeline-step">
@@ -127,7 +127,7 @@ const services = [
             <div className="timeline-content">
               <h4>Dia do Casamento</h4>
               <p>
-                Neste dia estou presente para criar a maquilhagem perfeita, com calma e atenção a cada detalhe, para que a noiva se sinta confiante, radiante e preparada para viver cada momento do seu grande dia. Para além disso, estou presente para acompanhar os momentos importantes, como a reportagem fotográfica.
+                Neste dia estou presente para criar a maquilhagem perfeita, com calma e atenção a cada detalhe, para que a noiva se sinta confiante e preparada para viver cada momento do seu grande dia. Para além disso, estou presente para acompanhar os momentos importantes, como a reportagem fotográfica.
 
               </p>
             </div>
@@ -139,12 +139,11 @@ const services = [
   },
   {
     title: 'Maquilhagem Social',
-    images: [socialv2, social4, social5, social2, social6, social8, social7, social3],
+    images: [socialv2, social4, social5, social2, social6, social8, social7, social3, noiva10],
     description: (
       <p>
-        Serviço de alta qualidade desenvolvido para quem procura elegância, sofisticação e um acabamento impecável,
-        confortável e duradouro. Cada detalhe é cuidadosamente trabalhado para valorizar a beleza natural de forma
-        elegante e harmoniosa, adaptando-se, sempre, à essência de cada pessoa e ao evento/ocasião.
+        Serviço de alta qualidade e personalizado, desenvolvido para quem procura elegância, sofisticação e um acabamento impecável, confortável e duradouro. 
+        Dos looks mais clássicos aos mais coloridos, cada maquilhagem é criada para refletir a personalidade de cada pessoa e fazê-la sentir-se confiante em qualquer ocasião especial.
       </p>
     ),
   },
@@ -154,6 +153,17 @@ const services = [
     description: (
       <p>
         Serviço onde a criatividade, expressão visual e elegância andam de mãos dadas. Ideal para quem deseja destacar-se com cores, brilho, detalhes especiais e elementos decorativos.
+      </p>
+    ),
+  },
+  {
+    title: 'Master Your Makeup - Workshop de Automaquilhagem',
+    images: [],
+    description: (
+      <p>
+        Experiência totalmente personalizada, adaptada às necessidades, objetivos e estilo de cada pessoa.
+        Em vez de seguir um método rígido, o workshop é construído de forma individual, permitindo aprender as técnicas e os produtos que realmente fazem sentido.
+        O objetivo é que cada pessoa termine o workshop a conhecer melhor o seu rosto, a saber o que a valoriza e a sentir-se mais confiante ao maquilhar-se.
       </p>
     ),
   }

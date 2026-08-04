@@ -120,6 +120,7 @@ export default function Contacts() {
               <option value="noiva">Maquilhagem de Noiva</option>
               <option value="social">Maquilhagem Social</option>
               <option value="criativa">Maquilhagem Criativa</option>
+              <option value="workshop-automaquilhagem">Master Your Makeup - Workshop de Automaquilhagem</option>
               <option value="outro">Outro</option>
             </select>
           </div>

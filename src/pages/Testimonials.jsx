@@ -1,8 +1,11 @@
 import './Page.css'
-import { useState, useLayoutEffect, useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
 export default function Testimonials() {
-
   const testimonials = [
     `A maquilhagem estava e ficou perfeita durante todo o casamento! Cheguei ao final da noite e não a queria tirar! Senti-me linda e poderosa! Conseguiste fazer a minha pele natural para que as minhas sardas ainda se notassem, e foi muito elogiada!
 Obrigada por me dares confiança e me fazeres sentir linda!
@@ -30,83 +33,36 @@ Além disso senti-me super confortável, não senti que estava demasiado maquilh
 Obrigada! Fazes uma pessoa sentir-se 300 vezes mais confiante e mais bonita. Não há palavras para o excelente trabalho que fazes 🩷😘`,
     `Incrível, gostei imenso 🥰 aguentou o tempo todo mesmo com a temperatura que esteve 🙏🏼
 Obrigada mais uma vez pelo teu excelente profissionalismo ✨`
-  ];
-
-  const [index, setIndex] = useState(0);
-  const [bubbleHeight, setBubbleHeight] = useState(null);
-  const measureRef = useRef(null);
-
-  const measureHeights = () => {
-    if (!measureRef.current) return;
-    const children = measureRef.current.querySelectorAll('.message-bubble-measure');
-    if (children.length === 0) return;
-    let min = children[0].offsetHeight;
-    children.forEach((el) => {
-      min = Math.min(min, el.offsetHeight);
-    });
-    if (min > 0) setBubbleHeight(min + 50);
-  };
-
-  useLayoutEffect(() => {
-    measureHeights();
-    window.addEventListener('resize', measureHeights);
-    return () => window.removeEventListener('resize', measureHeights);
-  }, []);
-
-  const prevSlide = () => {
-    setIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
-
-  const nextSlide = () => {
-    setIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
-
+  ]
 
   return (
-    <section className="page about">
+    <section className="page about testimonials-section">
       <h1 className="page-title">Testemunhos</h1>
 
       <div className="slider-container">
-
-        {/* Bubble + Arrows ONLY */}
-        <div className="bubble-wrapper">
-          <div ref={measureRef} className="bubble-measurer" aria-hidden="true">
-            {testimonials.map((t, i) => (
-              <div key={i} className="message-bubble message-bubble-measure">
-                {t}
-              </div>
-            ))}
-          </div>
-          <button type="button" className="arrowTestimonials left" onClick={prevSlide} aria-label="Testemunho anterior">
-            ‹
-          </button>
-
-          <div
-            className="message-bubble"
-            style={bubbleHeight != null ? { height: bubbleHeight } : undefined}
-          >
-            {testimonials[index]}
-          </div>
-
-          <button type="button" className="arrowTestimonials right" onClick={nextSlide} aria-label="Próximo testemunho">
-            ›
-          </button>
-        </div>
-
-        {/* DOTS OUTSIDE */}
-        <div className="dotsTestimonials">
-          {testimonials.map((_, i) => (
-            <span
-              key={i}
-              className={`dotTestimonials ${i === index ? "active" : ""}`}
-              onClick={() => setIndex(i)}
-            />
+        <Swiper
+          className="testimonials-swiper"
+          modules={[Pagination]}
+          spaceBetween={0}
+          slidesPerView={1}
+          speed={300}
+          pagination={{
+            clickable: true,
+          }}
+          grabCursor
+          resistanceRatio={0}
+          touchReleaseOnEdges={true}
+        >
+          {testimonials.map((text, i) => (
+            <SwiperSlide key={i}>
+              <div className="message-bubble">{text}</div>
+            </SwiperSlide>
           ))}
-        </div>
-
+        </Swiper>
+        <p className="testimonials-swipe-hint" aria-hidden="true">
+          Desliza ou clica nos pontos para ver mais testemunhos
+        </p>
       </div>
     </section>
-  );
-
+  )
 }
-
