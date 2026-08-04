@@ -55,7 +55,10 @@ Obrigada mais uma vez pelo teu excelente profissionalismo ✨`
         >
           {testimonials.map((text, i) => (
             <SwiperSlide key={i}>
-              <div className="message-bubble">{text}</div>
+              <figure className="testimonial-card">
+                <span className="testimonial-quote" aria-hidden="true">&ldquo;</span>
+                <blockquote className="testimonial-text">{text}</blockquote>
+              </figure>
             </SwiperSlide>
           ))}
         </Swiper>
